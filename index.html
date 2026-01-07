@@ -1,0 +1,2325 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+
+  <title>Tarjeta Digital | Urban Threads</title>
+
+  <style>
+    :root{
+      --bg:#f4f6f9;
+      --card:#ffffff;
+      --text:#0f2233;
+      --muted:#6b7c8a;
+
+      /* Colores estilo Identificame */
+      --hero1:#39c6bf;
+      --hero2:#2da3ff;
+      --green:#56c7a6;
+      --green2:#49b99a;
+
+      --max:1100px;
+      --radius:18px;
+      --shadow:0 10px 26px rgba(0,0,0,.10);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{ color:inherit; text-decoration:none; }
+
+    .wrap{ width:min(var(--max), 92%); margin:0 auto; }
+
+    /* ===================== HERO ===================== */
+    .hero{
+      position:relative;
+      padding:64px 0 54px;
+      color:#fff;
+      overflow:hidden;
+      background: linear-gradient(120deg, var(--hero1), var(--hero2));
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:
+        radial-gradient(circle at 12% 25%, rgba(255,255,255,.22) 0 1px, transparent 1px),
+        radial-gradient(circle at 88% 55%, rgba(255,255,255,.20) 0 1px, transparent 1px),
+        radial-gradient(circle at 52% 18%, rgba(255,255,255,.16) 0 1px, transparent 1px);
+      background-size: 240px 240px;
+      opacity:.55;
+      pointer-events:none;
+    }
+    .hero-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:28px;
+      align-items:center;
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.1;
+      letter-spacing:.2px;
+    }
+    .hero p{
+      margin:0 0 18px;
+      max-width:52ch;
+      opacity:.95;
+      line-height:1.5;
+    }
+    .brand{
+      display:inline-flex;
+      align-items:baseline;
+      gap:6px;
+      font-weight:800;
+      font-size:22px;
+      margin-top:10px;
+    }
+    .brand .mx{
+      background:rgba(255,255,255,.22);
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:900;
+    }
+
+    .hero-cta{
+      display:flex;
+      gap:12px;
+      margin-top:18px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:0;
+      padding:12px 18px;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      box-shadow: var(--shadow);
+    }
+    .btn.primary{ background:#fff; color:#0b3555; }
+    .btn.ghost{ background:rgba(255,255,255,.18); color:#fff; box-shadow:none; border:1px solid rgba(255,255,255,.35); }
+
+    .hero-phone{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .hero-phone img{
+      width:min(360px, 92%);
+      filter: drop-shadow(0 18px 30px rgba(0,0,0,.25));
+    }
+
+/* ===== FONDO NET MÁS “IDENTIFICAME” ===== */
+#net{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  opacity:.28;           /* más sutil */
+  pointer-events:none;
+}
+
+/* La capa del contenido arriba del canvas */
+.hero-grid{
+  position:relative;
+  z-index:2;
+}
+
+/* ===== ENTRADA DE LA MANO + FLOAT ===== */
+@keyframes phoneEnter{
+  from{
+    opacity:0;
+    transform: translateY(26px) rotate(-6deg) scale(.96);
+    filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+  }
+  to{
+    opacity:1;
+    transform: translateY(0) rotate(0deg) scale(1);
+    filter: drop-shadow(0 18px 30px rgba(0,0,0,.25));
+  }
+}
+
+@keyframes phoneFloat{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-10px); }
+}
+
+/* aplica a tu imagen de la mano */
+.hero-phone img{
+  opacity:0; /* arranca invisible para que se note la entrada */
+  animation: phoneEnter .75s ease-out forwards, phoneFloat 4.2s ease-in-out .75s infinite;
+  will-change: transform, opacity;
+}
+
+
+    /* ===================== SECTION BASE ===================== */
+    section{
+      padding:66px 0;
+      background:#fff;
+    }
+    section.alt{
+      background: linear-gradient(180deg, #4fc8a8, #43b9a0);
+      color:#fff;
+    }
+    .sec-title{
+      text-align:center;
+      margin:0 0 10px;
+      font-size:40px;
+      letter-spacing:.2px;
+    }
+    .sec-sub{
+      text-align:center;
+      margin:0 auto 36px;
+      max-width:70ch;
+      color:var(--muted);
+      line-height:1.55;
+    }
+    section.alt .sec-sub{ color:rgba(255,255,255,.9); }
+
+    /* ===================== ¿QUÉ ES? ===================== */
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:36px;
+      align-items:center;
+    }
+    .illus{
+      display:flex;
+      justify-content:center;
+    }
+    .illus img{ width:min(420px, 95%); }
+
+    .card{
+      background:var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+    }
+    .card p{ margin:0; color:#3b4b57; line-height:1.6; }
+
+    /* ===================== VENTAJAS ===================== */
+    /* ====== BENEFITS – TEXTO E ICONOS GRANDES (COMO PRIMERA IMAGEN) ====== */
+
+.benefits{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.benefit-list{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px 32px;
+}
+
+/* cada beneficio */
+.benefit{
+  display: grid;
+  grid-template-columns: 80px 1fr;   /* icono grande + texto */
+  gap: 22px;
+  align-items: center;
+}
+
+/* ICONO GRANDE (SIN CUADRO, COMO LA PRIMERA IMAGEN) */
+.icon{
+  width: 80px;
+  height: 80px;
+  background: transparent;
+  border-radius: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 48px;   /* emoji grande */
+  line-height: 1;
+}
+
+/* TÍTULO GRANDE */
+.benefit h4{
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* TEXTO GRANDE */
+.benefit p{
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  opacity: .95;
+}
+
+/* RESPONSIVE */
+@media (max-width: 980px){
+  .benefits{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px){
+  .benefit-list{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+    /* ===================== INFO INCLUYE ===================== */
+   /* =========================
+   INCLUDE: “Tarjeta” bonita (SIN CAMBIAR DATOS)
+   REEMPLAZA tu bloque .include/.include ul/.include li por este
+========================= */
+
+.include{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  align-items: center;
+}
+
+/* la tarjeta (tu .card actual) más tipo “presentación” */
+.include .card{
+  position: relative;
+  border-radius: 22px;
+  padding: 26px 26px;
+  background:
+    radial-gradient(900px 220px at 20% 0%, rgba(86,199,166,.20), transparent 55%),
+    radial-gradient(800px 260px at 100% 20%, rgba(45,163,255,.14), transparent 60%),
+    #ffffff;
+  border: 1px solid rgba(15, 23, 42, .08);
+  box-shadow:
+    0 22px 60px rgba(2, 6, 23, .08),
+    0 6px 16px rgba(2, 6, 23, .05);
+  overflow:hidden;
+}
+
+/* línea decorativa tipo tarjeta */
+.include .card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width: 7px;
+  background: linear-gradient(180deg, rgba(86,199,166,1), rgba(45,163,255,1));
+  opacity: .95;
+}
+
+/* mini “header” opcional dentro de la tarjeta (si no lo usas, no afecta) */
+.include .card .card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  margin: 0 0 18px 0;
+  padding-left: 10px; /* por la franja izquierda */
+}
+.include .card .card-head h3{
+  margin:0;
+  font-size: 16px;
+  letter-spacing: .9px;
+  text-transform: uppercase;
+  color:#0f2233;
+  font-weight: 800;
+}
+.include .card .card-head .pill{
+  font-size: 12px;
+  font-weight: 800;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(86,199,166,.14);
+  border: 1px solid rgba(86,199,166,.25);
+  color:#0f2233;
+}
+
+/* tu lista en 2 columnas como tarjeta */
+.include ul{
+  margin:0;
+  padding: 0 0 0 10px; /* por la franja */
+  list-style:none;
+
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 28px;
+}
+
+/* items: separador suave */
+.include li{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  color:#0f2233;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(15,23,42,.10);
+}
+
+/* tus emojis/íconos */
+.include li .ico{
+  width: 34px;
+  height: 34px;
+  display:grid;
+  place-items:center;
+  border-radius: 12px;
+  background: rgba(45,163,255,.10);
+  border: 1px solid rgba(45,163,255,.18);
+  font-size: 20px;
+  flex: 0 0 auto;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .include{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .include ul{
+    grid-template-columns: 1fr;
+  }
+}
+
+    /* ===================== FUNCIONES AVANZADAS ===================== */
+
+
+.funciones{
+  background: rgb(73, 156, 171);
+  padding: clamp(44px, 6vw, 90px) 0;
+}
+
+.funciones .sec-sub{
+  color:#1f2937;
+}
+
+/* Grid: Desktop 3 tarjetas */
+.features3{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.6vw, 34px);
+  align-items: stretch;
+}
+
+/* Tarjeta */
+.feature{
+  background:#fff;
+  border:1px solid rgba(15,23,42,.08);
+  border-radius: 22px;
+  padding: clamp(22px, 2.6vw, 34px) clamp(18px, 2.2vw, 30px);
+  text-align:center;
+
+  box-shadow:
+    0 18px 40px rgba(2,6,23,.08),
+    0 2px 8px rgba(2,6,23,.04);
+
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.feature:hover{
+  transform: translateY(-6px);
+  border-color: rgba(20,118,201,.22);
+  box-shadow:
+    0 26px 60px rgba(2,6,23,.12),
+    0 6px 16px rgba(2,6,23,.06);
+}
+
+/* Icono */
+.f-ico{
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  margin: 0 auto 14px;
+  display:grid;
+  place-items:center;
+
+  background: rgba(20,118,201,.10);
+  color:#1476c9;
+  box-shadow: 0 10px 22px rgba(20,118,201,.10);
+}
+
+.f-ico img, .f-ico svg{
+  width: 38px;
+  height: 38px;
+}
+
+/* Título */
+.feature h4{
+  margin: 10px 0 10px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+
+/* Texto */
+.feature p{
+  margin: 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* ===== RESPONSIVE BIEN HECHO ===== */
+
+/* TABLET: 2 columnas (NO 1) */
+@media (max-width: 980px){
+  .features3{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .feature{
+    max-width: none;
+    margin: 0;
+    padding: 26px 18px;
+  }
+}
+
+/* CELULAR: 1 columna */
+@media (max-width: 640px){
+  .features3{
+    grid-template-columns: 1fr;
+  }
+  .feature{
+    padding: 22px 16px;
+  }
+}
+
+/* =========================
+   (OPCIONAL) TU LISTA CON EMOJIS
+   la dejo por si la usas en otra parte
+   ========================= */
+
+.features-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 40px;
+}
+
+.features-list li{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2f2f2f;
+}
+
+.features-list .ico{
+  font-size: 26px;
+  width: 34px;
+  text-align: center;
+  line-height: 1;
+}
+
+/* ===================== USA TU TARJETA DONDE QUIERAS ===================== */
+
+/* =========================
+   SECCIÓN: USA TU TARJETA
+   (REEMPLAZA TODO TU BLOQUE .uso POR ESTE COMPLETO)
+========================= */
+.uso{
+  --green:#56c7a6;
+  background:#fff;
+  padding: 34px 0 70px;
+}
+
+.uso-wrap{
+  width: min(1200px, 92%);
+  margin: 0 auto;
+}
+
+/* Encabezado centrado */
+.uso-head{
+  text-align:center;
+  margin-bottom: 34px;
+}
+
+.uso-title{
+  margin:0;
+  font-size: clamp(40px, 4vw, 66px);
+  line-height: 1.02;
+  font-weight: 400;
+  color:#3b3b3b;
+}
+
+.uso-underline{
+  display:block;
+  width: 86px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--green);
+  margin: 14px auto 0;
+}
+
+.uso-sub{
+  margin: 22px auto 0;
+  max-width: 820px;
+  font-size: 18px;
+  line-height: 1.75;
+  color:#6b7c8a;
+}
+
+/* Layout 2 columnas */
+.uso-grid{
+  display:grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Teléfono */
+.uso-phone{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height: 420px;
+}
+
+.uso-phone img{
+  width: min(520px, 100%);
+  height:auto;
+  transform: rotate(-12deg);
+  transform-origin: 50% 60%;
+  filter: drop-shadow(0 22px 34px rgba(0,0,0,.16));
+}
+
+/* Checklist */
+.uso-lista{
+  display:flex;
+  justify-content:flex-start;
+}
+
+/* ✅ FIX: el UL tiene ancho estable, por eso todas las palomas quedan alineadas */
+.uso-checklist{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap: 24px;
+
+  width: 100%;
+  max-width: 640px;   /* evita que cada renglón “mueva” el bloque */
+}
+
+/* ✅ Desktop: alineado a la izquierda como tu captura */
+.uso-checklist li{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  font-size: 28px;
+  font-weight: 700;
+  color:#3b3b3b;
+
+  width: 100%;
+  justify-content: flex-start; /* paloma siempre misma columna */
+}
+
+/* Cuadro y palomita */
+.uso-check{
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  background: rgba(86,199,166,.14);
+  border: 3px solid rgba(86,199,166,.55);
+  position: relative;
+  flex: 0 0 auto;
+  box-shadow: 0 10px 20px rgba(0,0,0,.06); /* ✅ FIX: QUITÉ UN ) EXTRA */
+}
+
+.uso-check::after{
+  content:"";
+  position:absolute;
+  left: 15px;
+  top: 11px;
+  width: 12px;
+  height: 20px;
+  border-right: 4px solid var(--green);
+  border-bottom: 4px solid var(--green);
+  transform: rotate(40deg);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet y abajo */
+@media (max-width: 980px){
+  .uso-grid{
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .uso-phone{ min-height: unset; }
+
+  /* ✅ centra el bloque completo (UL), pero mantiene texto alineado */
+  .uso-lista{
+    display:flex;
+    justify-content:center;
+  }
+
+  .uso-checklist{
+    margin: 0 auto;
+    max-width: 560px;
+  }
+
+  .uso-checklist li{
+    font-size: 22px;
+  }
+
+  .uso-phone img{
+    width: min(480px, 95%);
+    transform: rotate(-10deg);
+  }
+}
+
+/* Celular */
+@media (max-width: 480px){
+  .uso-title{ font-size: 34px; }
+  .uso-sub{ font-size: 16px; }
+
+  .uso-checklist{
+    max-width: 520px;
+  }
+
+  .uso-checklist li{ font-size: 18px; }
+
+  .uso-check{ width: 40px; height: 40px; }
+  .uso-check::after{ left: 13px; top: 9px; }
+}
+
+/* ===================== ¿QUIÉN LA NECESITA? ===================== */
+/* ===== QUIÉN LA NECESITA ===== */
+.quien{ background:whitesmoke;
+ }
+.who-grid{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:34px 26px;
+  align-items:start;
+  justify-items:center;
+}
+
+.who{
+  text-align:center;
+  width:100%;
+  max-width:220px;
+}
+.w-ico{
+  width:86px; height:86px;
+  border-radius:22px;
+  background:#eaf4ff;
+  display:grid; place-items:center;
+  font-size:28px;
+  margin:0 auto 14px;
+}
+.who h4{
+  margin:0;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:13px;
+  color:#0f2233;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .who-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px){
+  .who-grid{ grid-template-columns:1fr; }
+}
+
+/* ===================== RESPONSIVE NUEVO ===================== */
+@media (max-width: 980px){
+  .features3{ grid-template-columns:1fr; }
+  .uso-grid{ grid-template-columns:1fr; text-align:center; }
+  .uso-title{ font-size:32px; }
+  .who3{ grid-template-columns:1fr; }
+  .uso-phone img{ transform:none; }
+}
+
+
+    /* ===================== EJEMPLOS (8) ===================== */
+    .examples{
+      background:#fff;
+    }
+    .grid-examples{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:32px;
+      align-items:start;
+      margin-top:10px;
+    }
+    .example-card{
+      text-align:center;
+    }
+    .example-card h3{
+      margin:12px 0 10px;
+      font-size:18px;
+      color:#384552;
+    }
+    .example-card .btn-mini{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:10px;
+      background:var(--green);
+      color:#fff;
+      font-weight:800;
+    }
+
+    /* Mockup teléfono */
+    .phone{
+      position:relative;
+      width:260px;
+      margin:0 auto;
+      aspect-ratio: 9 / 18;
+    }
+    .phone-frame{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      z-index:3;
+      pointer-events:none;
+    }
+    .phone-screen{
+      position:absolute;
+      top:var(--screenTop, 54px);
+      left:var(--screenLeft, 22px);
+      width:var(--screenW, 216px);
+      height:var(--screenH, 470px);
+      overflow:hidden;
+      border-radius:22px;
+      z-index:2;
+      background:#000;
+    }
+    .screen-img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    /* Fuerza que la 4ª tarjeta baje debajo de la 1 */
+.grid-examples .example-card:nth-child(4){
+  grid-column: 1;
+}
+
+/* ===================== PROCESO DE COMPRA ===================== */
+.proceso{
+  padding: 90px 0;
+  background: linear-gradient(90deg, #5aa8dc 0%, #78cfe0 55%, #8ee9e8 100%);
+}
+
+.proceso .wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.proceso-title{
+  margin: 0;
+  font-size: clamp(34px, 4vw, 64px);
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: .5px;
+}
+
+.proceso-line{
+  width: 70px;
+  height: 4px;
+  margin: 18px auto 0;
+  background: rgba(255,255,255,.9);
+  border-radius: 20px;
+}
+
+/* grid */
+.proceso-grid{
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px;
+  align-items: stretch;
+  justify-items: center;
+}
+
+/* cards */
+.proceso-card{
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  padding: 56px 44px;
+  text-align: left;
+  box-shadow: 0 18px 40px rgba(0,0,0,.10);
+}
+
+.proceso-ico{
+  color: #0b74d6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.proceso-card h3{
+  margin: 0 0 14px;
+  font-size: 30px;
+  line-height: 1.05;
+  font-weight: 700;
+  color: #111;
+}
+
+.proceso-card h3 span{
+  font-weight: 800;
+  margin-right: 8px;
+}
+
+.proceso-card p{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.55;
+  color: #6c6c6c;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .proceso-grid{
+    grid-template-columns: 1fr;
+    gap: 26px;
+    margin-top: 46px;
+  }
+  .proceso-card{
+    text-align: center;
+    padding: 44px 28px;
+  }
+}
+
+
+    /* ===================== PROCESO COMPRA ===================== */
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+      margin-top:22px;
+    }
+    .step{
+      background:#fff;
+      border-radius:16px;
+      box-shadow: var(--shadow);
+      padding:18px;
+      text-align:center;
+    }
+    .step .n{
+      width:42px; height:42px;
+      border-radius:14px;
+      background:rgba(255,255,255,.35);
+      margin:0 auto 10px;
+      display:grid; place-items:center;
+      font-weight:900;
+      color:#0b3555;
+    }
+    section.alt .step{ background:rgba(255,255,255,.92); }
+
+    /* ====== SECCIÓN PRECIO ====== */
+/* =========================
+   SECCIÓN PRECIO (REEMPLAZAR TODO)
+========================= */
+
+/* ===================== PRECIO (4 PLANES) ===================== */
+
+.precio{
+  padding:70px 0;
+}
+
+.wrap{
+  width:min(1200px,92%);
+  margin:0 auto;
+}
+
+.precio-title{
+  margin:0;
+  font-size:clamp(28px,3vw,42px);
+  text-align:center;
+}
+
+.precio-line{
+  display:block;
+  width:90px;
+  height:4px;
+  background:#53c6a6;
+  margin:14px auto 18px;
+  border-radius:99px;
+}
+
+.precio-sub{
+  margin:0 0 26px;
+  opacity:.8;
+  text-align:center;
+}
+
+/* ===================== GRID ===================== */
+
+.precio-grid--4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  align-items:stretch;
+}
+
+/* ===================== CARD ===================== */
+
+.plan{
+  background:rgba(255,255,255,.92);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 14px 34px rgba(0,0,0,.12);
+  border:1px solid rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===================== HEADER ===================== */
+
+.plan-head{
+  text-align:center;
+}
+
+.plan-head h3{
+  margin:0 0 6px;
+  font-size:18px;
+  letter-spacing:.4px;
+}
+
+.plan-mini{
+  margin:0 0 12px;
+  opacity:.75;
+  font-size:13px;
+}
+
+.plan-price{
+  display:flex;
+  justify-content:center;
+  align-items:baseline;
+  gap:6px;
+  margin:0 0 6px;
+}
+
+.plan-money{
+  font-size:34px;
+  font-weight:800;
+}
+
+.plan-cur{
+  font-size:13px;
+  font-weight:700;
+  opacity:.7;
+  text-transform:uppercase;
+}
+
+.plan-note{
+  margin:0;
+  font-size:13px;
+  opacity:.8;
+}
+
+/* ===================== SEPARADOR ===================== */
+
+.plan-sep{
+  border:0;
+  height:1px;
+  background:rgba(0,0,0,.10);
+  margin:14px 0;
+}
+
+/* ===================== LISTA ===================== */
+
+.plan-list{
+  list-style:none;
+  padding:0;
+  margin:0 auto 20px;
+  display:grid;
+  gap:16px;
+  font-size:14px;
+  color:#8f97a1;
+  width:fit-content;
+  text-align:left;
+}
+
+.plan-list li{
+  position:relative;
+  padding-left:26px;
+  line-height:1.55;
+}
+
+.plan-list li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:.05em;
+  color:#ff4b6e;
+  font-weight:900;
+  font-size:20px;
+}
+
+/* ===================== BOTÓN PRECIO (AISLADO) ===================== */
+
+.btn-precio{
+  margin-top:auto;
+  width:100%;
+  border-radius:12px;
+  padding:12px 14px;
+  font-weight:800;
+  cursor:pointer;
+  border:0;
+  color:#fff;
+  background:linear-gradient(90deg,#0b5f94,#53c6a6);
+  box-shadow:0 12px 26px rgba(0,0,0,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.btn-precio:hover{
+  filter:brightness(1.05);
+  transform:translateY(-1px);
+}
+
+.btn-precio:active{
+  transform:translateY(0);
+  filter:brightness(.97);
+}
+
+/* ===================== VARIANTES ===================== */
+
+.plan--destacado{
+  border:2px solid #53c6a6;
+  box-shadow:0 18px 46px rgba(83,198,166,.25);
+}
+
+.plan--destacado .plan-money{
+  color:#0b5f94;
+}
+
+.plan--store{
+  border:2px solid rgba(0,0,0,.14);
+}
+
+.plan--store .plan-money{
+  color:#7a004d;
+}
+
+/* ===================== PAGOS ===================== */
+
+.precio-pay{
+  margin-top:26px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  color:#8d8d8d;
+  font-size:13px;
+}
+
+.pay-logos{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.pay-logos img{
+  height:26px;
+  width:auto;
+  opacity:.95;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media(max-width:1100px){
+  .precio-grid--4{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:560px){
+  .precio-grid--4{
+    grid-template-columns:1fr;
+  }
+  .plan{
+    border-radius:16px;
+    padding:26px 22px;
+  }
+  .plan-money{
+    font-size:40px;
+  }
+  .btn-precio{
+    width:85%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+
+    /* ===================== FAQ ===================== */
+    .faq{
+      background: linear-gradient(180deg, #4fc8a8, #43b9a0);
+      color:#fff;
+    }
+    .faq-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    details{
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.28);
+      border-radius:14px;
+      padding:12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    details p{
+      margin:10px 0 0;
+      opacity:.95;
+      line-height:1.5;
+    }
+
+   /* =========================
+   CTA OSCURO (COMO LA 2DA IMAGEN)
+  
+========================= */
+/* =========================================================
+   CTA FINAL RESPONSIVE (SIN DESBORDE)
+   - Desktop: 2 columnas reales (texto / imagen)
+   - Tablet/Móvil: 1 columna, todo centrado y ordenado
+   REEMPLAZA TODO tu bloque CTA por esto
+========================================================= */
+
+/* ===================== CTA IDENTICA (fondo negro + 2 columnas) ===================== */
+:root{
+  --cta-accent:#53c6a6;         /* botón + etiqueta .mx */
+  --cta-white:rgba(255,255,255,.92);
+  --cta-soft:rgba(255,255,255,.70);
+  --cta-line:rgba(255,255,255,.25);
+  --cta-bg:#0b0b0b;
+}
+
+.cta-identifica{
+  position:relative;
+  background: var(--cta-bg);
+  color: var(--cta-white);
+  overflow:hidden;
+}
+
+/* “marco” con líneas finas como en la imagen */
+.cta-frame{
+  position:relative;
+  border-top:1px solid var(--cta-line);
+  border-bottom:1px solid var(--cta-line);
+}
+.cta-frame::before,
+.cta-frame::after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width:1px;
+  background: var(--cta-line);
+  pointer-events:none;
+}
+.cta-frame::before{ left: 6.5%; }
+.cta-frame::after{ right: 6.5%; }
+
+.cta-inner{
+  width:min(1200px, 92%);
+  margin:0 auto;
+  padding: clamp(44px, 5vw, 70px) 0 clamp(54px, 6vw, 90px);
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items:center;
+  gap: clamp(18px, 3vw, 44px);
+  position:relative;
+}
+
+/* sombreado/viñeta suave (para que se vea “pro”) */
+.cta-identifica::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1200px 700px at 20% 35%, rgba(0,0,0,.05), rgba(0,0,0,.55)),
+    radial-gradient(900px 520px at 75% 50%, rgba(0,0,0,.00), rgba(0,0,0,.55));
+  pointer-events:none;
+}
+
+/* IZQUIERDA */
+.cta-left{
+  text-align:center;
+  padding-left: clamp(0px, 2vw, 22px);
+  position:relative;
+  z-index:2;
+}
+
+.cta-title{
+  margin:0 0 22px;
+  font-weight:500;
+  line-height:1.08;
+  letter-spacing:.2px;
+  font-size: clamp(30px, 3.7vw, 56px);
+  color: var(--cta-white);
+}
+
+.cta-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 28px;
+  border-radius: 4px;
+  background: var(--cta-accent);
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  font-size: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  margin-bottom: 28px;
+}
+.cta-btn:hover{ filter: brightness(1.02); transform: translateY(-1px); }
+
+.cta-subtitle{
+  margin: 6px 0 20px;
+  font-weight:300;
+  line-height:1.05;
+  font-size: clamp(28px, 3.2vw, 52px);
+  color: var(--cta-white);
+}
+
+.cta-social{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 18px;
+}
+
+/* Botones redondos */
+.social-pill{
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  box-shadow: 0 16px 34px rgba(0,0,0,.40);
+  transform: translateZ(0);
+}
+.social-pill svg{ width: 82px; height: 82px; display:block; }
+
+.social-pill.wa{
+  width: 104px;
+  height: 104px;
+  background: #1ccf5a;
+}
+.social-pill.wa svg{ color:#1ccf5a; } /* el círculo verde del SVG */
+.social-pill.fb{
+  width: 74px;
+  height: 74px;
+  background: rgba(255,255,255,.06);
+}
+.social-pill.fb svg{ width: 64px; height: 64px; color:#2f5aa6; }
+
+.social-pill.ig{
+  width: 74px;
+  height: 74px;
+  background: rgba(255,255,255,.06);
+}
+.social-pill.ig svg{ width: 64px; height: 64px; }
+
+.social-row{
+  display:flex;
+  gap: 16px;
+  align-items:center;
+  justify-content:center;
+}
+
+.social-pill:hover{ transform: translateY(-2px); }
+.social-pill:active{ transform: translateY(0px) scale(.98); }
+
+/* DERECHA (tu foto) */
+.cta-right{
+  position:relative;
+  min-height: 360px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  z-index:1;
+}
+
+/* Importante: tu imagen debe ser PNG con fondo recortado para verse como el ejemplo */
+.cta-photo{
+  width: min(560px, 100%);
+  height: auto;
+  object-fit: contain;
+  filter: saturate(.95) contrast(1.05);
+  opacity:.95;
+}
+
+/* Marca inferior Identificame.mx */
+.cta-brand{
+  position:absolute;
+  left:50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  display:flex;
+  align-items:flex-end;
+  gap: 6px;
+  z-index:3;
+  user-select:none;
+}
+.brand-text{
+  font-size: 26px;
+  font-weight:600;
+  letter-spacing:.2px;
+  color: var(--cta-white);
+}
+.brand-tag{
+  font-size: 18px;
+  font-weight:800;
+  padding: 6px 10px 7px;
+  border-radius: 0 0 0 0;
+  background: var(--cta-accent);
+  color:#fff;
+  position:relative;
+  top:-2px;
+}
+.brand-tag::before{
+  /* “pico” como etiqueta */
+  content:"";
+  position:absolute;
+  left:-10px;
+  bottom:0;
+  border-width: 0 10px 12px 0;
+  border-style: solid;
+  border-color: transparent var(--cta-accent) transparent transparent;
+}
+
+/* WhatsApp flotante abajo derecha */
+.wa-float{
+  position:fixed;
+  right: 22px;
+  bottom: 18px;
+  z-index:9999;
+  text-decoration:none;
+}
+.wa-float-badge{
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  background:#1ccf5a;
+  display:grid;
+  place-items:center;
+  box-shadow: 0 18px 36px rgba(0,0,0,.45);
+}
+.wa-float-badge svg{
+  width: 46px;
+  height: 46px;
+  color:#1ccf5a;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 980px){
+  .cta-inner{
+    grid-template-columns: 1fr;
+    text-align:center;
+  }
+  .cta-right{
+    justify-content:center;
+    min-height: 260px;
+    margin-top: 10px;
+  }
+  .cta-photo{
+    width: min(520px, 92%);
+    opacity:.92;
+  }
+  .cta-frame::before{ left: 4%; }
+  .cta-frame::after{ right: 4%; }
+}
+
+@media (max-width: 520px){
+  .social-pill.wa{ width: 92px; height: 92px; }
+  .social-pill.wa svg{ width: 72px; height: 72px; }
+
+  .brand-text{ font-size: 20px; }
+  .brand-tag{ font-size: 14px; padding: 6px 8px 7px; }
+
+  .wa-float{ right: 14px; bottom: 14px; }
+  .wa-float-badge{ width: 56px; height: 56px; }
+  .wa-float-badge svg{ width: 42px; height: 42px; }
+}
+/* =========================================================
+   ✅ PARCHE GLOBAL RESPONSIVE (PÉGALO AL FINAL)
+   - Evita desbordes en TODOS los dispositivos
+   - Arregla grids: 4->2->1, 3->2->1, etc.
+   - Ajusta Lottie, imágenes, tipografías grandes
+   ========================================================= */
+/* --- Anti-desborde real --- */
+html, body { width:100%; overflow-x:hidden; }
+* { box-sizing:border-box; }
+img, svg, video, canvas { max-width:100%; height:auto; display:block; }
+.wrap, .uso-wrap { width:min(1200px, 92%); margin-inline:auto; }
+
+/* Si un grid tiene textos/lotties largos, evita que empujen */
+.hero-grid,
+.two-col,
+.benefits,
+.include,
+.features3,
+.who-grid,
+.grid-examples,
+.proceso-grid,
+.precio-grid--4,
+.faq-grid,
+.steps,
+.uso-grid{
+  min-width:0;
+}
+.hero-grid > *,
+.two-col > *,
+.benefits > *,
+.include > *,
+.features3 > *,
+.who-grid > *,
+.grid-examples > *,
+.proceso-grid > *,
+.precio-grid--4 > *,
+.faq-grid > *,
+.steps > *,
+.uso-grid > *{
+  min-width:0;  /* CLAVE para que no se estire */
+}
+
+/* --- Tipografía fluida (evita que se vea gigante en móvil) --- */
+.hero h1{ font-size: clamp(26px, 4.2vw, 44px); }
+.sec-title{ font-size: clamp(26px, 3.6vw, 40px); }
+.sec-sub{ font-size: clamp(14.5px, 1.6vw, 18px); }
+
+/* --- BOTONES: que no rompan en móvil --- */
+.btn{ max-width:100%; }
+@media (max-width: 720px){
+  .hero-cta .btn{ width:100%; justify-content:center; }
+}
+
+/* --- HERO: grid seguro + imagen segura --- */
+.hero-grid{
+  display:grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap:28px;
+}
+.hero-phone img{
+  width:min(360px, 92%);
+  max-width:100%;
+}
+
+/* --- LOTTIE: NUNCA fijo 420x420 (esto arregla el desborde) --- */
+lottie-player{
+  width: min(420px, 100%) !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1;
+}
+
+/* --- TWO-COL / INCLUDE: grids seguros --- */
+.two-col{
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+}
+.include{
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+}
+
+/* --- BENEFITS: grid seguro --- */
+.benefits{
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+}
+.benefit-list{
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+}
+
+/* =========================================================
+   ✅ EJEMPLOS (TU MAYOR PROBLEMA)
+   Arregla: 4->2->1 y quita la regla que rompe el layout
+   ========================================================= */
+
+/* elimina el “truco” que rompe */
+.grid-examples .example-card:nth-child(4){
+  grid-column: auto !important;
+}
+
+/* define el contenedor real */
+.grid-examples{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2.5vw, 32px);
+}
+
+/* tu HTML usa .phone-simple, así que le damos estilo */
+.phone-simple{
+  width: min(260px, 100%);
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow:hidden;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.12);
+  background:#000;
+  aspect-ratio: 9 / 18;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.phone-simple img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   ✅ BREAKPOINTS REALES (tablet / móvil)
+   (SIN NADA DE .uso AQUÍ)
+   ========================================================= */
+
+@media (max-width: 980px){
+  /* HERO a 1 columna */
+  .hero-grid{
+    grid-template-columns: 1fr;
+    gap: 22px;
+    text-align:left;
+  }
+  .hero-phone{ justify-content:center; }
+
+  /* Sections */
+  section{ padding: 54px 0; }
+
+  /* ¿Qué es? / Incluye a 1 columna */
+  .two-col, .include{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  /* Beneficios: col derecha abajo */
+  .benefits{
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .benefit-list{
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  /* Funciones */
+  .features3{ grid-template-columns: 1fr; }
+
+  /* Quién: 3 -> 2 */
+  .who-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* Ejemplos: 4 -> 2 */
+  .grid-examples{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* FAQ: 2 -> 1 */
+  .faq-grid{ grid-template-columns: 1fr; }
+
+  /* Steps: 3 -> 1 */
+  .steps{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px){
+  section{ padding: 46px 0; }
+
+  /* Beneficios: 2 -> 1 */
+  .benefit-list{ grid-template-columns: 1fr; }
+
+  /* Quién: 2 -> 1 */
+  .who-grid{ grid-template-columns: 1fr; }
+
+  /* Ejemplos: 2 -> 1 */
+  .grid-examples{ grid-template-columns: 1fr; }
+
+  /* Include lista: 2 -> 1 */
+  .include ul{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px){
+  .wrap, .uso-wrap{ width:min(1200px, 92%); }
+  .phone-simple{ width: min(240px, 100%); }
+}
+</style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+  <!-- FONDO CON MOVIMIENTO -->
+  <canvas id="net"></canvas>
+
+  <div class="wrap hero-grid">
+    <div>
+      <h1>¿Quieres causar una primera impresión inolvidable?</h1>
+      <p>
+        Te presentamos tu <b>Tarjeta Digital</b> para compartir por WhatsApp,
+        redes sociales y link. Se ve increíble y la puedes actualizar cuando quieras.
+      </p>
+      <div class="brand">UrbanThreads <span class="mx">.mx</span></div>
+
+      <div class="hero-cta">
+        <a class="btn primary" href="#ejemplos">Ver ejemplos</a>
+        <a class="btn ghost" href="#precio">Ver precio</a>
+      </div>
+    </div>
+
+    <div class="hero-phone">
+      <img src="tarjetamano.png" alt="Teléfono mostrando tarjeta">
+    </div>
+  </div>
+</header>
+
+  <!-- ¿QUÉ ES? -->
+  <section>
+  <div class="wrap">
+    <h2 class="sec-title">¿Qué es una tarjeta de presentación digital?</h2>
+    <p class="sec-sub">
+      El papel ya es historia. Hoy tu tarjeta vive en un link y se comparte al instante.
+    </p>
+
+    <div class="two-col">
+      <div class="illus">
+        <lottie-player
+          src="tarjeta2seccion.json"
+          background="transparent"
+          speed="1"
+          style="max-width:100%;"
+"
+          loop
+          autoplay>
+        </lottie-player>
+      </div>
+
+      <div class="card">
+        <p>
+          Es una página web tipo “tarjeta” que abre en cualquier celular.
+          Incluye tu foto, nombre, contacto, botones, redes, galería y más.
+          Ideal para vender más, dar confianza y compartir tu info en segundos.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- VENTAJAS -->
+  <section class="alt">
+    <div class="wrap">
+      <h2 class="sec-title">Ventajas de la Tarjeta Digital</h2>
+      <p class="sec-sub">Es como tener un mini-sitio personal que genera más ventas.</p>
+
+      <div class="benefits">
+        <div class="benefit-list">
+          <div class="benefit"><div class="icon">✓</div><div><h4>Memorable</h4><p>Tu info siempre a la mano.</p></div></div>
+          <div class="benefit"><div class="icon">↻</div><div><h4>Actualizable</h4><p>Cambios fáciles cuando lo necesites.</p></div></div>
+          <div class="benefit"><div class="icon">⚡</div><div><h4>Rápida</h4><p>Abre en segundos en cualquier dispositivo.</p></div></div>
+          <div class="benefit"><div class="icon">⇪</div><div><h4>Fácil de compartir</h4><p>WhatsApp, QR, redes o link.</p></div></div>
+          <div class="benefit"><div class="icon">📱</div><div><h4>Responsiva</h4><p>Se adapta a móvil y desktop.</p></div></div>
+          <div class="benefit"><div class="icon">♻</div><div><h4>Ecológica</h4><p>Menos papel, más impacto.</p></div></div>
+        </div>
+
+        <div class="illus">
+          <!-- Teléfono a la derecha (como Identificame) -->
+          <img src="tarjetaseccion2.1.png" alt="Ejemplo de tarjeta">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFORMACIÓN INCLUYE -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-title">Información que incluye tu Tarjeta Digital</h2>
+      <p class="sec-sub">Muestra a todos tus clientes tu información personal y del negocio.</p>
+
+     <div class="include">
+  <div class="illus">
+
+    <lottie-player
+      src="Desarrollo web.json"
+      background="transparent"
+      speed="1"
+      style="width:420px; max-width:100%; height:420px;"
+      loop
+      autoplay>
+    </lottie-player>
+
+  </div>
+
+        <div class="card">
+         <ul class="features-list">
+  <li><span class="ico">📷</span> Foto de perfil</li>
+  <li><span class="ico">👤</span> Nombre</li>
+  <li><span class="ico">🏢</span> Empresa</li>
+  <li><span class="ico">✉️</span> Correo</li>
+  <li><span class="ico">📞</span> Teléfono</li>
+  <li><span class="ico">💬</span> WhatsApp</li>
+
+  <li><span class="ico">🌐</span> Redes sociales</li>
+  <li><span class="ico">📝</span> Biografía</li>
+  <li><span class="ico">🎥</span> Video</li>
+  <li><span class="ico">🖼️</span> Galería</li>
+  <li><span class="ico">📍</span> Mapa interactivo</li>
+  <li><span class="ico">🔗</span> Sitio web</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- FUNCIONES AVANZADAS -->
+<section class="funciones">
+  <div class="wrap">
+    <h2 class="sec-title">Funciones Avanzadas</h2>
+    <p class="sec-sub">Ninguna tarjeta de presentación impresa te ofrecerá esto…</p>
+
+    <div class="features3">
+      <article class="feature">
+        <div class="f-ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2v16h10V4H7zm5 15a1.25 1.25 0 1 0 0 2.5A1.25 1.25 0 0 0 12 19z"/>
+          </svg>
+        </div>
+        <h4>Contacto inmediato</h4>
+        <p>Con un solo toque pueden llamarte o enviarte WhatsApp.</p>
+      </article>
+
+      <article class="feature">
+        <div class="f-ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 10v-8h8v8h-8zm2-18v4h4V5h-4zM5 5v4h4V5H5zm0 10v4h4v-4H5zm10 0v4h4v-4h-4z"/>
+          </svg>
+        </div>
+        <h4>Código QR</h4>
+        <p>Genera tu QR para abrir tu tarjeta directo.</p>
+      </article>
+
+      <article class="feature">
+        <div class="f-ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0 2c4.42 0 8 2.01 8 4.5V22H4v-3.5C4 16.01 7.58 14 12 14z"/>
+          </svg>
+        </div>
+        <h4>Guardar contacto</h4>
+        <p>Tu cliente guarda tus datos en el celular en segundos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- USA TU TARJETA DIGITAL DONDE QUIERAS -->
+<!-- =========================
+     SECCIÓN: USA TU TARJETA
+========================= -->
+<section class="uso">
+  <div class="uso-wrap">
+
+    <header class="uso-head">
+      <h2 class="uso-title">Usa tu Tarjeta Digital donde quieras</h2>
+      <span class="uso-underline" aria-hidden="true"></span>
+
+      <p class="uso-sub">
+        Al estar tu información en internet puedes compartir tu información de forma presencial o remota.
+        <br>Mejora tu alcance al instante.
+      </p>
+    </header>
+
+    <div class="uso-grid">
+      <!-- Teléfono -->
+      <div class="uso-phone">
+        <img src="tarjetacelinclinado.png" alt="Tarjeta digital en teléfono">
+      </div>
+
+      <!-- Lista -->
+      <div class="uso-lista">
+        <ul class="uso-checklist">
+          <li><span class="uso-check" aria-hidden="true"></span> Firma de tu correo</li>
+          <li><span class="uso-check" aria-hidden="true"></span> Reuniones Online</li>
+          <li><span class="uso-check" aria-hidden="true"></span> Redes Sociales</li>
+          <li><span class="uso-check" aria-hidden="true"></span> Sitio Web</li>
+          <li><span class="uso-check" aria-hidden="true"></span> Ferias y Reuniones</li>
+          <li><span class="uso-check" aria-hidden="true"></span> Conferencias</li>
+          <li><span class="uso-check" aria-hidden="true"></span> Eventos de Networking</li>
+          <li><span class="uso-check" aria-hidden="true"></span> Entrevistas de Trabajo</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- ¿QUIÉN LA NECESITA? -->
+<section class="quien">
+  <div class="wrap">
+    <h2 class="sec-title">¿Quién necesita una tarjeta de negocios digital?</h2>
+    <p class="sec-sub">El papel ya es historia. Lo de hoy es una tarjeta de presentación digital innovadora e impactante.</p>
+
+    <div class="who-grid">
+      <article class="who"><div class="w-ico">💡</div><h4>Emprendedores</h4></article>
+      <article class="who"><div class="w-ico">👤</div><h4>Freelancers</h4></article>
+      <article class="who"><div class="w-ico">💬</div><h4>Conferencistas</h4></article>
+
+      <article class="who"><div class="w-ico">🏢</div><h4>Negocios</h4></article>
+      <article class="who"><div class="w-ico">💼</div><h4>Vendedores</h4></article>
+      <article class="who"><div class="w-ico">❤</div><h4>Tú</h4></article>
+    </div>
+  </div>
+</section>
+
+
+ <!-- EJEMPLOS -->
+<section class="examples" id="ejemplos">
+  <div class="wrap">
+    <h2 class="sec-title">Ejemplos</h2>
+    <p class="sec-sub">Aquí vas a poner tus diseños reales.</p>
+
+    <div class="grid-examples">
+
+      <!-- Ejemplo -->
+      <article class="example-card">
+        <div class="phone-simple">
+          <img src="ejemplo1 (1).png" alt="Ejemplo 1">
+        </div>
+        <h3>Ejemplo 1</h3>
+        <a class="btn-mini" href="ejemplos/ej1.html" target="_blank">Ver</a>
+      </article>
+
+      <article class="example-card">
+        <div class="phone-simple">
+          <img src="ejemplo1 (2).png" alt="Ejemplo 2">
+        </div>
+        <h3>Ejemplo 2</h3>
+        <a class="btn-mini" href="ejemplos/ej2.html" target="_blank">Ver</a>
+      </article>
+
+      <article class="example-card">
+        <div class="phone-simple">
+          <img src="ejemplo1 (3).png" alt="Ejemplo 3">
+        </div>
+        <h3>Ejemplo 3</h3>
+        <a class="btn-mini" href="ejemplos/ej3.html" target="_blank">Ver</a>
+      </article>
+
+      <article class="example-card">
+        <div class="phone-simple">
+          <img src="ejemplo1 (4).png" alt="Ejemplo 4">
+        </div>
+        <h3>Ejemplo 4</h3>
+        <a class="btn-mini" href="ejemplos/ej4.html" target="_blank">Ver</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+<!-- PROCESO DE COMPRA -->
+<section class="proceso" id="proceso">
+  <div class="wrap">
+    <h2 class="proceso-title">Proceso de compra</h2>
+    <div class="proceso-line"></div>
+
+    <div class="proceso-grid">
+
+      <article class="proceso-card">
+        <div class="proceso-ico" aria-hidden="true">
+          <!-- icono dinero -->
+          <svg viewBox="0 0 24 24" width="42" height="42">
+            <path fill="none" stroke="currentColor" stroke-width="2" d="M3 7h18v10H3z"/>
+            <path fill="none" stroke="currentColor" stroke-width="2" d="M6 9h1M17 15h1"/>
+            <circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3><span>1.</span> Realiza el pago</h3>
+        <p>Aceptamos pago con tarjeta de crédito/débito y pagos en Oxxo.</p>
+      </article>
+
+      <article class="proceso-card">
+        <div class="proceso-ico" aria-hidden="true">
+          <!-- icono identificación -->
+          <svg viewBox="0 0 24 24" width="42" height="42">
+            <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="9" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M13 11h5M13 14h5" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3><span>2.</span> Danos tu información</h3>
+        <p>Llena un formulario con tus datos de contacto y contenido multimedia.</p>
+      </article>
+
+      <article class="proceso-card">
+        <div class="proceso-ico" aria-hidden="true">
+          <!-- icono arroba -->
+          <svg viewBox="0 0 24 24" width="42" height="42">
+            <path d="M16.5 18.5c-1 .9-2.3 1.5-3.8 1.5A7.2 7.2 0 1 1 20 12.8V13c0 1.7-1.3 3-3 3s-3-1.3-3-3V9.5"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3><span>3.</span> Recibe en tu correo</h3>
+        <p>El link con tu tarjeta de presentación digital lista para ser compartida.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+  <section class="precio" id="precio">
+  <div class="wrap">
+    <h2 class="precio-title">Precio</h2>
+    <span class="precio-line" aria-hidden="true"></span>
+    <p class="precio-sub">A continuación se listan los planes con sus respectivas características:</p>
+
+    <div class="precio-grid precio-grid--4">
+
+      <!-- BÁSICA -->
+      <article class="plan">
+        <div class="plan-head">
+          <h3>TARJETA BÁSICA</h3>
+          <p class="plan-mini">Ideal para empezar</p>
+          <div class="plan-price">
+            <span class="plan-money">$120</span><span class="plan-cur">mxn</span>
+          </div>
+          <p class="plan-note">Incluye lo esencial</p>
+        </div>
+
+        <hr class="plan-sep">
+
+        <ul class="plan-list">
+          <li>Encabezado</li>
+          <li>¿Quién soy?</li>
+          <li>Redes sociales</li>
+          <li>Botón de contacto</li>
+          <li>QR</li>
+        </ul>
+
+        <button class="btn-precio" type="button">Comprar</button>
+      </article>
+
+      <!-- MEDIA -->
+      <article class="plan plan--destacado">
+        <div class="plan-head">
+          <h3>TARJETA MEDIA</h3>
+          <p class="plan-mini">Hasta 5 secciones</p>
+          <div class="plan-price">
+            <span class="plan-money">$550</span><span class="plan-cur">mxn</span>
+          </div>
+          <p class="plan-note">Con QR y redes incluidas</p>
+        </div>
+
+        <hr class="plan-sep">
+
+        <ul class="plan-list">
+          <li>Hasta 5 secciones</li>
+          <li>Diseño Avanzado</li>
+          <li>Botón de llamar</li>
+          <li>WhatsApp (mensaje)</li>
+          <li>Compartir por WhatsApp</li>
+          <li>Redes sociales</li>
+          <li>QR</li>
+          <li>Cambios con costo adicional</li>
+        </ul>
+
+        <button class="btn-precio" type="button">Comprar</button>
+      </article>
+
+      <!-- PREMIUM -->
+      <article class="plan">
+        <div class="plan-head">
+          <h3>TARJETA PREMIUM</h3>
+          <p class="plan-mini">Hasta 12 secciones</p>
+          <div class="plan-price">
+            <span class="plan-money">$1800</span><span class="plan-cur">mxn</span>
+          </div>
+          <p class="plan-note">Más completa para tu marca</p>
+        </div>
+
+        <hr class="plan-sep">
+
+        <ul class="plan-list">
+          <li>Hasta 12 secciones</li>
+          <li>Diseño Premium</li>
+          <li>Botón de llamar</li>
+          <li>WhatsApp completo</li>
+          <li>Redes sociales</li>
+          <li>QR</li>
+          <li>Galería / Portafolio</li>
+        </ul>
+
+        <button class="btn-precio" type="button">Comprar</button>
+      </article>
+
+      <!-- TIENDA -->
+      <article class="plan plan--store">
+        <div class="plan-head">
+          <h3>TIENDA</h3>
+          <p class="plan-mini">Catálogo + carrito</p>
+          <div class="plan-price">
+            <span class="plan-money">$3500</span><span class="plan-cur">mxn</span>
+          </div>
+          <p class="plan-note">Hasta 60 productos</p>
+        </div>
+
+        <hr class="plan-sep">
+
+        <ul class="plan-list">
+          <li>Catálogo + carrito</li>
+          <li>Pago por WhatsApp o portal</li>
+          <li>QR + redes</li>
+          <li>Hasta 60 productos</li>
+          <li>61–200: $10 MXN c/u</li>
+          <li>201+: $5 MXN c/u</li>
+        </ul>
+
+        <button class="btn-precio" type="button">Comprar</button>
+      </article>
+
+    </div>
+
+  <!--
+<div class="precio-pay">
+  <span class="pay-text">Aceptamos:</span>
+  <div class="pay-logos">
+    <img src="paypal.png" alt="PayPal">
+    <img src="mercadopago.png" alt="Mercado Pago">
+  </div>
+</div>
+-->
+</section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="wrap">
+      <h2 class="sec-title">Preguntas Frecuentes</h2>
+      <p class="sec-sub">Respuestas rápidas para comprar sin dudas.</p>
+
+      <div class="faq-grid">
+        <details>
+          <summary>¿Modificar información tiene costo extra?</summary>
+          <p>No. Solo contáctanos. Algunos cambios pueden tener límites según el plan.</p>
+        </details>
+        <details>
+          <summary>¿En qué dispositivos se puede ver?</summary>
+          <p>En cualquier dispositivo con internet: celular, tablet o computadora.</p>
+        </details>
+        <details>
+          <summary>¿Puedo poner mi tarjeta con mi dominio?</summary>
+          <p>Sí, se puede configurar con tu dominio (según el plan).</p>
+        </details>
+        <details>
+          <summary>¿Cómo envío mi tarjeta a mis clientes?</summary>
+          <p>Por WhatsApp, redes, QR o link directo.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+<!-- =========================
+     SECCIÓN CTA 
+========================= -->
+<!-- ===================== CTA / CONTACTO (idéntico al screenshot) ===================== -->
+<section class="cta-identifica" aria-label="Call to action y contacto">
+  <div class="cta-frame">
+    <div class="cta-inner">
+      <!-- COLUMNA IZQUIERDA (texto + botones + iconos) -->
+      <div class="cta-left">
+        <h2 class="cta-title">¿Listo para llevar tu<br>negocio al siguiente nivel?</h2>
+
+        <a class="cta-btn" href="#comprar">Comprar Tarjeta</a>
+
+        <p class="cta-subtitle">¿Dudas?<br>Contáctanos</p>
+
+        <div class="cta-social">
+          <!-- WhatsApp grande -->
+          <a class="social-pill wa" href="#whatsapp" aria-label="WhatsApp">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path fill="#fff" d="M19.11 17.44c-.29-.14-1.67-.82-1.93-.91-.26-.1-.45-.14-.64.14-.19.29-.74.91-.91 1.1-.17.19-.34.21-.63.07-.29-.14-1.23-.45-2.34-1.43-.86-.77-1.45-1.72-1.62-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.64-1.55-.88-2.13-.23-.55-.46-.48-.64-.49h-.55c-.19 0-.51.07-.78.36-.26.29-1.02.99-1.02 2.42 0 1.43 1.04 2.82 1.18 3.01.14.19 2.05 3.13 4.97 4.39.7.3 1.24.48 1.67.62.7.22 1.33.19 1.83.11.56-.08 1.67-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.55-.33z"/>
+      <path fill="#fff" d="M16.02 3C9.4 3 4.02 8.38 4.02 15c0 2.12.55 4.19 1.6 6.02L4 29l8.2-1.57A11.95 11.95 0 0 0 16.02 27C22.64 27 28.02 21.62 28.02 15S22.64 3 16.02 3zm0 21.8c-1.77 0-3.5-.48-5-1.4l-.36-.21-4.86.93.96-4.73-.24-.38A9.75 9.75 0 0 1 6.27 15c0-5.38 4.37-9.75 9.75-9.75s9.75 4.37 9.75 9.75-4.37 9.8-9.75 9.8z"/>
+    </svg>
+          </a>
+
+          <!-- FB + IG -->
+          <div class="social-row">
+            <a class="social-pill fb" href="#facebook" aria-label="Facebook">
+              <svg viewBox="0 0 256 256" role="img" aria-hidden="true">
+                <path fill="currentColor" d="M128 24c-57.4 0-104 46.6-104 104s46.6 104 104 104 104-46.6 104-104S185.4 24 128 24z" opacity=".95"/>
+                <path fill="#fff" d="M145.6 92.8h17.6V72h-17.6c-19.4 0-32 12.7-32 32v16h-16v20.8h16V184h20.8v-43.2h17.6l3.2-20.8h-20.8V104c0-6.5 4.2-11.2 11.2-11.2z"/>
+              </svg>
+            </a>
+
+            <a class="social-pill ig" href="#instagram" aria-label="Instagram">
+              <svg viewBox="0 0 256 256" role="img" aria-hidden="true">
+                <defs>
+                  <radialGradient id="igG" cx="30%" cy="30%" r="90%">
+                    <stop offset="0%" stop-color="#ffd776"/>
+                    <stop offset="35%" stop-color="#ff4fd8"/>
+                    <stop offset="70%" stop-color="#7a2cff"/>
+                    <stop offset="100%" stop-color="#3a49ff"/>
+                  </radialGradient>
+                </defs>
+                <circle cx="128" cy="128" r="104" fill="url(#igG)" opacity=".98"/>
+                <rect x="78" y="78" width="100" height="100" rx="28" fill="none" stroke="#fff" stroke-width="14"/>
+                <circle cx="128" cy="128" r="26" fill="none" stroke="#fff" stroke-width="14"/>
+                <circle cx="162" cy="94" r="8" fill="#fff"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA (TU IMAGEN) -->
+      <div class="cta-right" aria-hidden="true">
+        <!-- Reemplaza el src por tu PNG -->
+        <img class="cta-photo" src="footerimg.png" alt="">
+      </div>
+
+      <!-- Marca inferior -->
+      <div class="cta-brand" aria-label="Identificame.mx">
+        <span class="brand-text">Identificame</span><span class="brand-tag">.mx</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp flotante (abajo derecha) -->
+<a class="wa-float" href="https://wa.me/521XXXXXXXXXX" target="_blank" aria-label="WhatsApp">
+  <span class="wa-float-badge">
+    <!-- LOGO OFICIAL WHATSAPP -->
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path fill="#fff" d="M19.11 17.44c-.29-.14-1.67-.82-1.93-.91-.26-.1-.45-.14-.64.14-.19.29-.74.91-.91 1.1-.17.19-.34.21-.63.07-.29-.14-1.23-.45-2.34-1.43-.86-.77-1.45-1.72-1.62-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.64-1.55-.88-2.13-.23-.55-.46-.48-.64-.49h-.55c-.19 0-.51.07-.78.36-.26.29-1.02.99-1.02 2.42 0 1.43 1.04 2.82 1.18 3.01.14.19 2.05 3.13 4.97 4.39.7.3 1.24.48 1.67.62.7.22 1.33.19 1.83.11.56-.08 1.67-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.55-.33z"/>
+      <path fill="#fff" d="M16.02 3C9.4 3 4.02 8.38 4.02 15c0 2.12.55 4.19 1.6 6.02L4 29l8.2-1.57A11.95 11.95 0 0 0 16.02 27C22.64 27 28.02 21.62 28.02 15S22.64 3 16.02 3zm0 21.8c-1.77 0-3.5-.48-5-1.4l-.36-.21-4.86.93.96-4.73-.24-.38A9.75 9.75 0 0 1 6.27 15c0-5.38 4.37-9.75 9.75-9.75s9.75 4.37 9.75 9.75-4.37 9.8-9.75 9.8z"/>
+    </svg>
+  </span>
+</a>
+</section>
+
+  <script>
+(() => {
+  const c = document.getElementById('net');
+  const ctx = c.getContext('2d', { alpha:true });
+
+  let w, h, dpr, pts;
+
+  // ===== AJUSTES “MÁS NOTORIO” =====
+  const CFG = {
+    density: 12000,      // menor = más puntos (antes 18000)
+    minPts: 55,
+    maxPts: 130,
+
+    linkDist: 170,       // más distancia = más conexiones (antes 120)
+    pointR: 2.1,         // tamaño punto (antes 2)
+    speed: 0.55,         // velocidad (antes 0.7) -> más suave
+
+    lineW: 1.35,         // grosor líneas
+    lineA: 0.55,         // alpha base líneas (más fuerte)
+    glowA: 0.22          // alpha glow (brillito)
+  };
+
+  function resize(){
+    dpr = Math.max(1, window.devicePixelRatio || 1);
+    w = c.clientWidth; h = c.clientHeight;
+
+    c.width = Math.floor(w * dpr);
+    c.height = Math.floor(h * dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    const count = Math.round((w*h)/CFG.density);
+    const n = Math.min(Math.max(count, CFG.minPts), CFG.maxPts);
+
+    pts = Array.from({length: n}, () => ({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      vx: (Math.random()-.5)*CFG.speed,
+      vy: (Math.random()-.5)*CFG.speed
+    }));
+  }
+
+  function step(){
+    ctx.clearRect(0,0,w,h);
+
+    // ===== PUNTOS =====
+    for(const p of pts){
+      p.x += p.vx; p.y += p.vy;
+
+      if(p.x<0||p.x>w) p.vx *= -1;
+      if(p.y<0||p.y>h) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, CFG.pointR, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,.95)';
+      ctx.fill();
+    }
+
+    // ===== LÍNEAS + GLOW =====
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const a=pts[i], b=pts[j];
+        const dx=a.x-b.x, dy=a.y-b.y;
+        const dist = Math.hypot(dx,dy);
+
+        if(dist < CFG.linkDist){
+          // intensidad según cercanía
+          const t = 1 - (dist/CFG.linkDist);
+          const alpha = (t*t) * CFG.lineA;
+
+          // glow atrás (más grueso + transparente)
+          ctx.strokeStyle = `rgba(255,255,255,${alpha * CFG.glowA})`;
+          ctx.lineWidth = CFG.lineW * 3.2;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.stroke();
+
+          // línea principal arriba (más fina)
+          ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+          ctx.lineWidth = CFG.lineW;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  step();
+})();
+</script>
+
+
+</body>
+</html>
